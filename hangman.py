@@ -35,7 +35,7 @@ class Bank:
         self.current_word = choice(self.topics[self.current_topic])
         for i in self.current_word:
             self.current_word_display.append('_')
-        print(f'Word is {self.current_word} letters long.')
+        print(f'Word is {len(self.current_word)} letters long.')
         print(self.current_word_display)
 
     def check_solve(self):
@@ -93,12 +93,10 @@ class Main:
         word_bank.pick_word()
 
         while word_bank.not_solved and player1.lives > 0:
-            while player1.guess_validation_incomplete:
-                player1.guess()
-                game.validate_user_input(player1)
-                game.check_answer_update_lives(word_bank,player1)
+            player1.guess()
+            game.validate_user_input(player1)
+            game.check_answer_update_lives(word_bank,player1)
             print(word_bank.current_word_display)
-            player1.guess_validation_incomplete = True
             word_bank.check_solve()
 
         if not word_bank.not_solved:
